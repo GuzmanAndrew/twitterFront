@@ -9,18 +9,29 @@ import { ServiceService } from '../../service/service.service';
 export class ProfileComponent implements OnInit {
 
   profiles: any;
+  tweets: any;
 
   constructor(private service: ServiceService) { }
 
   ngOnInit() {
     this.getProfile();
+    this.getProfileAws();
+  }
+
+  getProfileAws() {
+    this.service.getTweetAllAws().subscribe(
+      (res:any) => {
+        this.profiles = res.Items;
+      },
+      err => console.error(err)
+    );
   }
 
   getProfile() {
     this.service.getTweetAll().subscribe(
       (res:any) => {
         console.log(res);
-        this.profiles = res.Items;
+        this.tweets = res.data;
       },
       err => console.error(err)
     );

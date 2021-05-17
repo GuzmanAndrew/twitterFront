@@ -9,10 +9,15 @@ import { map, finalize } from 'rxjs/operators';
 export class ServiceService {
 
   url = 'https://t55lxmhfp7.execute-api.us-east-2.amazonaws.com/users'
+  urlTwitter = 'http://localhost:3001/tweets-by-id?id=85909338'
 
   constructor(private http: HttpClient) { }
 
-  getTweetAll() {
+  getTweetAllAws() {
     return this.http.get(this.url);
+  }
+
+  getTweetAll() {
+    return this.http.get(this.urlTwitter);
   }
 }
